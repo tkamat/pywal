@@ -23,10 +23,15 @@ def gtk():
     """Move gtkrc files to the correct location."""
     theme_path = HOME / ".themes" / "Flatabulous-wal"
     gtk2_file = CACHE_DIR / "colors-gtk2.rc"
+    gtk3_file = __cache_dir__ / "colors-gtk3.css"
 
     if theme_path.is_dir():
         if gtk2_file.is_file():
             shutil.copy(gtk2_file, theme_path / "gtk-2.0")
+
+        if gtk3_file.is_file():
+            shutil.copy(gtk3_file, theme_path / "gtk-3.0")
+            shutil.copy(gtk3_file, theme_path / "gtk-3.20")
 
         # Here we call a Python 2 script to reload the GTK themes.
         # This is done because the Python 3 GTK/Gdk libraries don't
